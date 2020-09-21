@@ -13,6 +13,9 @@ jobs:
       - name: Install
         run: npm install
 
+      - name: Dist
+        run: npm run dist
+
       # - name: Unit Tests
       #   run: npm run test
 

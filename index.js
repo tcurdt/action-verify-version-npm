@@ -1,17 +1,32 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
+//const github = require('@actions/github');
+
+// RUNNER_OS=Linux
+// GITHUB_HEAD_REF=
+// GITHUB_REPOSITORY_OWNER=tcurdt
+// GITHUB_REF=refs/heads/master
+// GITHUB_SHA=c525642066471a675ec4e76cff226636266905b2
+// GITHUB_RUN_ID=265960061
+// GITHUB_BASE_REF=
+// GITHUB_JOB=test
+// GITHUB_REPOSITORY=tcurdt/action-verify-version-npm
+// GITHUB_EVENT_NAME=push
+// GITHUB_WORKFLOW=ci
 
 try {
 
-  // input
-  const file = core.getInput('file');
-  console.log(`Hello ${file}!`);
+  const sha = process.env['GITHUB_SHA']
+  console.log(`sha: [${sha}]`)
 
-  // payload
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  const ref = process.env['GITHUB_REF']
+  console.log(`ref: [${ref}]`)
 
-  // output
+  const file = core.getInput('file')
+  console.log(`file: [${file}]`)
+
+  // const payload = JSON.stringify(github.context.payload, undefined, 2)
+  // console.log(`The event payload: ${payload}`);
+
   const version = (new Date()).toTimeString();
   core.setOutput("version", version);
 

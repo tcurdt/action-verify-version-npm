@@ -12,7 +12,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js -o dist",
+    "dist": "ncc build index.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
