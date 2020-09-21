@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-//const github = require('@actions/github');
+const core = require('@actions/core')
+const fs = require('fs')
 
 // RUNNER_OS=Linux
 // GITHUB_HEAD_REF=
@@ -13,6 +13,16 @@ const core = require('@actions/core');
 // GITHUB_EVENT_NAME=push
 // GITHUB_WORKFLOW=ci
 
+function extractVersion(file) {
+
+  const data = fs.readFileSync(file, {encoding:'utf8', flag:'r'})
+
+  const package = JSON.parse(data)
+  const version = package.version
+
+  return version
+}
+
 try {
 
   const sha = process.env['GITHUB_SHA']
@@ -24,29 +34,24 @@ try {
   const file = core.getInput('file')
   console.log(`file: [${file}]`)
 
-  // const payload = JSON.stringify(github.context.payload, undefined, 2)
-  // console.log(`The event payload: ${payload}`);
+  const version = extractVersion(file)
+  console.log(`version: [${version}]`)
 
-  const version = (new Date()).toTimeString();
-  core.setOutput("version", version);
+  core.setOutput('version', version)
+
+  if (ref.startsWith('refs/tags/v')) {
+
+    const version_from_tag = ref.substring(10)
+    console.log(`version from tag: [${version_from_tag}]`)
+
+    if (version != version_from_tag) {
+      core.setFailed(`package version [${version}] != tag version [${version_from_tag}]`)
+    }
+
+  } else {
+    console.log(`no tag`)
+  }
 
 } catch (error) {
   core.setFailed(error.message);
 }
-
-// async function run() {
-//     const version = core.getInput("version");
-//     const package = core.getInput("package").replace("package.json", "");
-
-//     const child = exec("npm version " + version + " --prefix " + package + " --no-git-tag-version", (error, stdout, stderr) => {
-//         if(error != null) {
-//             core.setFailed(error);
-//         }
-//         if(stderr != null) {
-//             console.log(stderr);
-//         }
-//         console.log(stdout);
-//     });
-// }
-
-// run();
