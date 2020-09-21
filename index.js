@@ -41,7 +41,7 @@ try {
 
   if (ref.startsWith('refs/tags/v')) {
 
-    const version_from_tag = ref.substring(10)
+    const version_from_tag = ref.substring(11)
     console.log(`version from tag: [${version_from_tag}]`)
 
     if (version_from_package != version_from_tag) {
