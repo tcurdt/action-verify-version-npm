@@ -25,8 +25,8 @@ function extractVersion(file) {
 
 try {
 
-  const sha = process.env['GITHUB_SHA']
-  console.log(`sha: [${sha}]`)
+  // const sha = process.env['GITHUB_SHA']
+  // console.log(`sha: [${sha}]`)
 
   const ref = process.env['GITHUB_REF']
   console.log(`ref: [${ref}]`)
@@ -34,18 +34,18 @@ try {
   const file = core.getInput('file')
   console.log(`file: [${file}]`)
 
-  const version = extractVersion(file)
-  console.log(`version: [${version}]`)
+  const version_from_package = extractVersion(file)
+  console.log(`version from package: [${version_from_package}]`)
 
-  core.setOutput('version', version)
+  core.setOutput('version', version_from_package)
 
   if (ref.startsWith('refs/tags/v')) {
 
     const version_from_tag = ref.substring(10)
     console.log(`version from tag: [${version_from_tag}]`)
 
-    if (version != version_from_tag) {
-      core.setFailed(`package version [${version}] != tag version [${version_from_tag}]`)
+    if (version_from_package != version_from_tag) {
+      core.setFailed(`package version [${version_from_package}] != tag version [${version_from_tag}]`)
     }
 
   } else {
