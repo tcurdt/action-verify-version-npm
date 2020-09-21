@@ -16,6 +16,9 @@ jobs:
       # - name: Unit Tests
       #   run: npm run test
 
+      - name: Env
+        run: env
+
       - name: Integration Test
         uses: ./
         with:
