@@ -1,0 +1,21 @@
+name: 'Verify Package Version (npm)'
+author: '@tcurdt'
+description: 'Check and extract current version from package descriptor and compare it to the current tag'
+
+inputs:
+  file:
+    description: 'path to package.json'
+    required: true
+    default: './package.json'
+
+outputs:
+  version:
+    description: 'version extracted from file'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+# branding:
+#   icon: 'check-square'
+#   color: 'orange'
