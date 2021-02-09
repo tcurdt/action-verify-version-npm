@@ -6,13 +6,17 @@ Verifies that the package version matches the current tag.
 
 ### `file`
 
-**Required** Path to the package descriptor. Default `./package.json`.
+Path to the package descriptor. Default `./package.json`.
+
+### `prefix`
+
+Ref prefix. Default `refs/tags/v`.
 
 ## Outputs
 
 ### `version`
 
-The version from the descriptor.
+The version from the pom.
 
 ## Example usage
 

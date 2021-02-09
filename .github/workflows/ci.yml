@@ -16,9 +16,6 @@ jobs:
       - name: Dist
         run: npm run dist
 
-      # - name: Unit Tests
-      #   run: npm run test
-
       - name: Env
         run: env
 
@@ -26,3 +23,10 @@ jobs:
         uses: ./
         with:
           file: test/package.json
+        id: debug
+
+      - name: Env
+        run: env
+
+      - name: Output
+        run: echo "version=${{ steps.debug.outputs.version }}"

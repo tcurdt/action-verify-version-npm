@@ -5,8 +5,10 @@ description: 'Check and extract current version from package descriptor and comp
 inputs:
   file:
     description: 'path to package.json'
-    required: true
     default: './package.json'
+  prefix:
+    description: 'tag prefix'
+    default: 'refs/tags/v'
 
 outputs:
   version:
@@ -15,7 +17,3 @@ outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
-
-# branding:
-#   icon: 'check-square'
-#   color: 'orange'
