@@ -29,7 +29,7 @@ try {
   const prefix = core.getInput('prefix') || 'refs/tags/v'
   console.log(`prefix: [${prefix}]`)
 
-  const version_from_package = extractVersion(file)
+  const version_from_package = '' + extractVersion(file)
   console.log(`version from package: [${version_from_package}]`)
 
   core.setOutput('version', version_from_package)
